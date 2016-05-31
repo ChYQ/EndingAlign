@@ -5,6 +5,8 @@
 
 int endingAppendSpace ( char *fileName, char* col );
 int endingRemoveSpace ( char* fileName );
+int file_exists ( char *fileName );
+int isDigitalStr ( char *str );
 void help ( void );
 
 int main ( int argc, char **argv ) {
@@ -13,19 +15,16 @@ int main ( int argc, char **argv ) {
     char* fileName = NULL;
     char* column = NULL;
     int removeFlag = 0;
-    while( ( ch = getopt( argc, argv, "a:f:hr" ) ) != EOF ) { 
+    while( ( ch = getopt( argc, argv, "c:f:hr" ) ) != EOF ) { 
         switch(ch) { 
-        case 'a': 
+        case 'c': 
             column = optarg;
-            printf("a opt: %s\n", column); 
             break; 
         case 'f': 
             fileName = optarg; 
-            printf("f opt: %s\n", fileName); 
             break; 
         case 'r': 
             removeFlag = 1;
-            printf("r opt: %s\n", optarg); 
             break; 
         case 'h': 
             help();
@@ -37,17 +36,36 @@ int main ( int argc, char **argv ) {
     }
 
     if ( fileName != NULL ){
+
+        if ( !file_exists ( fileName ) ) {
+            printf("file is not exsit.\n");
+            return -1;
+        }
+
         if ( column != NULL && removeFlag != 1 ) {
+
+            if ( !isDigitalStr(column) ) {
+                printf("column is not a digital string.\n");
+                return -1;
+            }
+
             endingAppendSpace ( fileName, column );
             return 0;
+
         } else if ( column == NULL && removeFlag == 1 ) {
+
             endingRemoveSpace( fileName );
             return 0;
+
         } else {
+
             help();
+
         }
     } else {
+
         help();
+
     }
 
 }
@@ -153,6 +171,31 @@ int endingRemoveSpace ( char* fileName ) {
 
     remove ( fileName );                                               // delete source file
     rename ( tempFile, fileName );                                     // tempfile rename to source file
+}
+
+int file_exists ( char *fileName ) { 
+    if ( access(fileName, F_OK) == 0 ) {
+        return 1;
+    } else {
+        //printf("%s is not exist.\n", fileName);
+        return 0;
+    }
+}
+
+int isDigitalStr ( char *str ) {   
+    int len = strlen(str);
+    char *s = str;
+    int i = 0;
+ 
+    while ( '0' <= *s && *s <= '9' && i < len ){
+        s++;
+        i++;
+    }
+
+    if(i == len)
+        return 1;
+    else 
+        return 0;       
 }
 
 void help( void ) {
