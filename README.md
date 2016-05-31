@@ -9,6 +9,7 @@
 
 ## 操作方法
 
+* 使用make命令编译出程序：endingAlign
 * 指定filename，并且以column值为列，也就是对文件以column列对齐，不够的以空格
 填充:
 
