@@ -38,7 +38,7 @@ int main ( int argc, char **argv ) {
     if ( fileName != NULL ){
 
         if ( !file_exists ( fileName ) ) {
-            printf("file is not exsit.\n");
+            printf("file is not exist.\n");
             return -1;
         }
 
