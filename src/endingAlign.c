@@ -200,6 +200,6 @@ int isDigitalStr ( char *str ) {
 
 void help( void ) {
     printf ( "usage:\n" );
-    printf ( "     endingAlign -f <filename> -a <column>\n" );
+    printf ( "     endingAlign -f <filename> -c <column>\n" );
     printf ( "     endingAlign -r -f <filename>\n" );
 }
