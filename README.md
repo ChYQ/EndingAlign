@@ -15,11 +15,7 @@
 
 ```
     endingAlign -f <filename> -c <column>
-```
-
- 例：
-
-```
+    例：
     endingAlign -f readme.txt -c 80 
 ```
 
@@ -28,11 +24,7 @@
 
 ```
     endingAlign -r -f <filename>
-```
-
- 例：
-
-```
+    例：
     endingAlign -r -f readme.txt
 ```
 
